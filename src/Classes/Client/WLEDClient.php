@@ -112,6 +112,37 @@ class WLEDClient
 
     }
 
+    public function powerOnMultiLED(string $ip, array $ledIds): int
+    {
+        // Build a full frame of "off"
+        $pixels = array_fill(0, 10, [0, 0, 0]);
+
+        // Turn on just one LED (red here)
+        foreach ($ledIds as $ledId)
+        {
+            $pixels[$ledId] = [255, 0, 0];
+        }
+
+        $response = $this->client->request(
+            'POST',
+            $this->buildUrl($ip, self::STATE_ENDPOINT),
+            [
+                'json' => [
+                    'on' => true,
+                    'bri' => 255,
+                    'transition' => 0,
+                    'seg' => [[
+                        'id' => 0,
+                        'i' => $pixels,
+                    ]]
+                ]
+            ]
+        );
+
+        return $response->getStatusCode();
+
+    }
+
     private function buildUrl(string $ip, string $endpoint): string
     {
         return sprintf('http://%s%s', $ip, $endpoint);

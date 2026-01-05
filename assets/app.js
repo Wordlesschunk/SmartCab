@@ -1,3 +1,4 @@
+import './stimulus_bootstrap.js';
 import './styles/styles.css';
 
 window.addEventListener('DOMContentLoaded', event => {

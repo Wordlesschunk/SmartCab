@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cabinet{% endblock %}
+
+{% block body %}
+    <h1>Edit Cabinet</h1>
+
+    {{ include('cabinet/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_cabinet_index') }}">back to list</a>
+
+    {{ include('cabinet/_delete_form.html.twig') }}
+{% endblock %}

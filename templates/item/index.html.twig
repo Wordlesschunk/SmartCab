@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Item index{% endblock %}
+
+{% block body %}
+    <table id="example" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>
+                    <img src="https://media.rs-online.com/F7976222-01.jpg" style="width: 50px; height: auto;"> {{ item.name }}
+                </td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.drawer.cabinet.name }} - {{ item.drawer.label }}</td>
+                <td>
+                    <a href="{{ path('app_item_show', {'id': item.id}) }}">
+                        <button type="button" class="btn btn-primary">Show</button>
+                    </a>
+                    <a href="{{ path('app_item_edit', {'id': item.id}) }}">
+                        <button type="button" class="btn btn-secondary">Edit</button>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "paging": false,
+                "dom": '<"row"<"col-sm-6"f><"col-sm-6">>rt<"row"<"col-sm-12 col-md-5"i>>'
+            });
+        });
+    </script>
+
+    <a href="{{ path('app_item_new') }}"><button class="btn btn-primary mt-3">Create New</button></a>
+{% endblock %}

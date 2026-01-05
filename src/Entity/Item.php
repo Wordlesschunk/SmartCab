@@ -25,4 +25,45 @@ class Item
 
     #[ORM\Column]
     private int $quantity;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getDrawer(): Drawer
+    {
+        return $this->drawer;
+    }
+
+    public function setDrawer(Drawer $drawer): static
+    {
+        $this->drawer = $drawer;
+
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
 }

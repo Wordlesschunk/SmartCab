@@ -22,6 +22,9 @@ class Drawer
     #[ORM\JoinColumn(nullable: false)]
     private Cabinet $cabinet;
 
+    #[ORM\Column(length: 255)]
+    private string $label;
+
     #[ORM\Column]
     private int $position;
 
@@ -31,9 +34,66 @@ class Drawer
     #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'drawer', orphanRemoval: true)]
     private Collection $items;
 
-    public function __construct()
+    private function __construct(
+        Cabinet $cabinet,
+        string $label,
+        int $position
+    )
     {
+        $this->cabinet = $cabinet;
+        $this->label = $label;
+        $this->position = $position;
         $this->items = new ArrayCollection();
+    }
+
+    public static function create(
+        Cabinet $cabinet,
+        string $label,
+        int $position
+    ): static
+    {
+        return new self($cabinet, $label, $position);
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getCabinet(): Cabinet
+    {
+        return $this->cabinet;
+    }
+
+    public function setCabinet(Cabinet $cabinet): static
+    {
+        $this->cabinet = $cabinet;
+
+        return $this;
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(string $label): static
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): static
+    {
+        $this->position = $position;
+
+        return $this;
     }
 
     /**

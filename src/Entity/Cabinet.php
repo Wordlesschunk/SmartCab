@@ -37,4 +37,75 @@ class Cabinet
     {
         $this->drawers = new ArrayCollection();
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getIpAddress(): string
+    {
+        return $this->ipAddress;
+    }
+
+    public function setIpAddress(string $ipAddress): static
+    {
+        $this->ipAddress = $ipAddress;
+
+        return $this;
+    }
+
+    public function getDrawerCount(): int
+    {
+        return $this->drawerCount;
+    }
+
+    public function setDrawerCount(int $drawerCount): static
+    {
+        $this->drawerCount = $drawerCount;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Drawer>
+     */
+    public function getDrawers(): Collection
+    {
+        return $this->drawers;
+    }
+
+    public function addDrawer(Drawer $drawer): static
+    {
+        if (!$this->drawers->contains($drawer)) {
+            $this->drawers->add($drawer);
+            $drawer->setCabinet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDrawer(Drawer $drawer): static
+    {
+        if ($this->drawers->removeElement($drawer)) {
+            // set the owning side to null (unless already changed)
+            if ($drawer->getCabinet() === $this) {
+                $drawer->setCabinet(null);
+            }
+        }
+
+        return $this;
+    }
 }

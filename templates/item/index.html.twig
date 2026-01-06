@@ -86,19 +86,17 @@
                 </td>
 
                 <td class="actions-btns">
-                    {#                    <a href="{{ path('app_item_show', {'id': item.id}) }}" class="btn btn-sm btn-primary"> #}
-                    {#                        Show #}
-                    {#                    </a> #}
-                    {#                    <a href="{{ path('app_item_edit', {'id': item.id}) }}" class="btn btn-sm btn-secondary"> #}
-                    {#                        Edit #}
-                    {#                    </a> #}
+                    <div class="d-flex gap-2">
+                        <a href="" class="btn btn-sm btn-info">
+                            FIND
+                        </a>
 
-                    <form method="post" action="{{ path('app_item_delete', {'id': item.id}) }}"
-                          onsubmit="return confirm('Are you sure you want to delete this item?');">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </form>
-
+                        <form method="post" action="{{ path('app_item_delete', {'id': item.id}) }}"
+                              onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         {% endfor %}

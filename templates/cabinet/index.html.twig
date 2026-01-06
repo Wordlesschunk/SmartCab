@@ -3,16 +3,16 @@
 {% block title %}Cabinet index{% endblock %}
 
 {% block body %}
-    <h1>Cabinet index</h1>
+    <h1>Cabinets</h1>
 
-    <table class="table">
+        <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
                 <th>IpAddress</th>
                 <th>DrawerCount</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +23,12 @@
                 <td>{{ cabinet.ipAddress }}</td>
                 <td>{{ cabinet.drawerCount }}</td>
                 <td>
-                    <a href="{{ path('app_cabinet_show', {'id': cabinet.id}) }}">show</a>
-                    <a href="{{ path('app_cabinet_edit', {'id': cabinet.id}) }}">edit</a>
+                    <a href="{{ path('app_cabinet_show', {'id': cabinet.id}) }}" class="btn btn-sm btn-primary">
+                        Show
+                    </a>
+                    <a href="{{ path('app_cabinet_edit', {'id': cabinet.id}) }}" class="btn btn-sm btn-secondary">
+                        Edit
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +39,17 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_cabinet_new') }}">Create new</a>
+    <script>
+        $(document).ready(function () {
+            let table = $('#example').DataTable({});
+
+            $('#table-search').on('keyup', function () {
+                table.search(this.value).draw();
+            });
+        });
+    </script>
+
+    <a href="{{ path('app_cabinet_new') }}" class="btn btn-sm btn-secondary">
+        Create New
+    </a>
 {% endblock %}

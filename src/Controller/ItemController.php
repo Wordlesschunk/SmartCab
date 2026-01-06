@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/item')]
+#[Route('/')]
 final class ItemController extends AbstractController
 {
     #[Route(name: 'app_item_index', methods: ['GET'])]

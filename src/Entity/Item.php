@@ -18,7 +18,7 @@ class Item
 
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
-    private Drawer $drawer;
+    private ?Drawer $drawer = null;
 
     #[ORM\Column(length: 255)]
     private string $name;
@@ -31,7 +31,7 @@ class Item
         return $this->id;
     }
 
-    public function getDrawer(): Drawer
+    public function getDrawer(): ?Drawer
     {
         return $this->drawer;
     }

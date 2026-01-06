@@ -4,8 +4,6 @@
 
 {% block body %}
     <h1>Create new Item</h1>
-
-    {{ include('item/_form.html.twig') }}
-
-    <a href="{{ path('app_item_index') }}">back to list</a>
+    <twig:ItemNewForm/>
+    <a href="{{ path('app_item_index') }}"><button class="btn btn-info mt-3">Back to list</button></a>
 {% endblock %}

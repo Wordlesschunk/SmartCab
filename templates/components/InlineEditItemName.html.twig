@@ -1,7 +1,7 @@
 <div {{ attributes }}>
-    {% if flashMessage %}
-        <div class="alert alert-success">{{ flashMessage }}</div>
-    {% endif %}
+{#    {% if flashMessage %}#}
+{#        <div class="alert alert-success">{{ flashMessage }}</div>#}
+{#    {% endif %}#}
 
     <div class="d-inline-flex">
         {% if isEditing %}
@@ -34,7 +34,7 @@
                 <div class="form-text">Clear the field to trigger validation!</div>
             </form>
         {% else %}
-            <h2>{{ item.name }}</h2>
+            <div>{{ item.name }}</div>
             <button
                 data-action="live#action"
                 data-live-action-param="activateEditing"

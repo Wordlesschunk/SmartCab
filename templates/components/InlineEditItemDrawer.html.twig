@@ -1,0 +1,70 @@
+<div {{ attributes }}>
+    {% if not item %}
+        <div class="text-muted">No item provided.</div>
+    {% else %}
+        {% if flashMessage %}
+            <div class="alert alert-success mb-2">{{ flashMessage }}</div>
+        {% endif %}
+
+        <div class="d-inline-flex align-items-center gap-2">
+            {% if isEditing %}
+                <form class="row g-3">
+                    <div class="input-group mb-3 col">
+                        {% set error = this.getError('drawerId') %}
+
+                        <div class="form-floating">
+                            <select
+                                data-model="drawerId"
+                                class="form-select form-select-lg{{ error ? ' is-invalid' }}"
+                                autofocus
+                                id="item_drawer"
+                            >
+                                <option value="">Select a drawer</option>
+
+                                {% for drawer in this.drawerOptions %}
+                                    <option value="{{ drawer.id }}">
+                                        {{ drawer.name ?? ('Drawer #' ~ drawer.label) }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <label for="item_drawer">Item drawer</label>
+
+                            {% if error %}
+                                <div class="invalid-feedback">{{ error.message }}</div>
+                            {% endif %}
+                        </div>
+
+                        <button
+                            type="button"
+                            data-action="live#action:prevent"
+                            data-live-action-param="save"
+                            class="btn btn-outline btn-outline-{{ error ? 'danger' : 'secondary' }}"
+                        >
+                            Save
+                        </button>
+                    </div>
+
+                    <div class="form-text">Pick a drawer and hit Save.</div>
+                </form>
+            {% else %}
+                <div>
+                    {% if item.drawer %}
+                        {{ item.drawer.label ?? ('Drawer #' ~ item.drawer.label) }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </div>
+
+                <button
+                    type="button"
+                    data-action="live#action"
+                    data-live-action-param="activateEditing"
+                    class="btn btn-link p-0"
+                    title="Click to edit!"
+                >
+                    <twig:ux:icon name="mdi:pencil"/>
+                </button>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

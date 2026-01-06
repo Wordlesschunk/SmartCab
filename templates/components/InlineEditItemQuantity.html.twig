@@ -34,7 +34,8 @@
                 <div class="form-text">Clear the field to trigger validation!</div>
             </form>
         {% else %}
-            <h4>{{ item.quantity }}</h4>
+            <div>{{ item.quantity }}</div>
+
             <button
                 data-action="live#action"
                 data-live-action-param="activateEditing"

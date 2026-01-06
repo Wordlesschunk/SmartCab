@@ -26,6 +26,9 @@ class Item
     #[ORM\Column]
     private int $quantity;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageFilename = null;
+
     public function getId(): int
     {
         return $this->id;
@@ -46,6 +49,17 @@ class Item
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getImageFilename(): ?string
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(?string $imageFilename): self
+    {
+        $this->imageFilename = $imageFilename;
+        return $this;
     }
 
     public function setName(string $name): static

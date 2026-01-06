@@ -7,6 +7,8 @@ use App\Form\ItemType;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -30,6 +32,28 @@ final class ItemController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile|null $imageFile */
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                $newFilename = uniqid('item_', true).'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('kernel.project_dir') . '/public/uploads/items',
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // Optional: show a nice error instead of 500
+                    $this->addFlash('danger', 'Image upload failed.');
+                    return $this->redirectToRoute('app_item_new');
+                }
+
+                // Make sure your Item entity has this property + setter
+                $item->setImageFilename($newFilename);
+            }
+
             $entityManager->persist($item);
             $entityManager->flush();
 
@@ -39,14 +63,6 @@ final class ItemController extends AbstractController
         return $this->render('item/new.html.twig', [
             'item' => $item,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_item_show', methods: ['GET'])]
-    public function show(Item $item): Response
-    {
-        return $this->render('item/show.html.twig', [
-            'item' => $item,
         ]);
     }
 

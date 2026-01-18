@@ -15,12 +15,12 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\ValidatableComponentTrait;
 
 #[AsLiveComponent]
-class InlineEditDrawerLEDPosition extends AbstractController
+class InlineEditDrawerPosition extends AbstractController
 {
     use DefaultActionTrait;
     use ValidatableComponentTrait;
 
-    #[LiveProp(writable: ['preferredLEDPosition'])]
+    #[LiveProp(writable: ['position'])]
     #[Assert\Valid]
     public Drawer $drawer;
 

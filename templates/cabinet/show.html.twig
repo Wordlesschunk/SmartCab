@@ -39,7 +39,6 @@
             <th>Drawer</th>
             <th>Label</th>
             <th>Position</th>
-            <th>Preferred Position</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -48,10 +47,7 @@
         <tr>
             <td>{{ drawer.id }}</td>
             <td>{{ drawer.label }}</td>
-            <td>{{ drawer.position }}</td>
-            <td>
-                <twig:InlineEditDrawerLEDPosition :drawer="drawer"/>
-            </td>
+            <td><twig:InlineEditDrawerPosition :drawer="drawer"/></td>
             <td>
                 <a href="{{ path('drawer_power_on', { 'id': drawer.id }) }}" class="btn btn-sm btn-info">
                     Test

@@ -34,9 +34,6 @@ class Drawer
     #[ORM\OneToMany(targetEntity: Item::class, mappedBy: 'drawer', orphanRemoval: true)]
     private Collection $items;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $preferredLEDPosition = null;
-
     private function __construct(
         Cabinet $cabinet,
         string $label,
@@ -132,17 +129,5 @@ class Drawer
     public function __toString(): string
     {
         return $this->label;
-    }
-
-    public function getPreferredLEDPosition(): ?int
-    {
-        return $this->preferredLEDPosition;
-    }
-
-    public function setPreferredLEDPosition(int $preferredLEDPosition): static
-    {
-        $this->preferredLEDPosition = $preferredLEDPosition;
-
-        return $this;
     }
 }

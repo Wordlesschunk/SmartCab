@@ -44,7 +44,7 @@ final class CabinetLEDController extends AbstractController
     {
         $client->powerOnMultiLED(
             $item->getDrawer()->getCabinet()->getIpAddress(),
-            [$item->getDrawer()->getPreferredLEDPosition()]
+            [$item->getDrawer()->getPosition()]
         );
 
         return $this->redirectToRoute('app_item_index');
@@ -55,7 +55,7 @@ final class CabinetLEDController extends AbstractController
     {
         $client->powerOnMultiLED(
             $drawer->getCabinet()->getIpAddress(),
-            [$drawer->getPreferredLEDPosition()]
+            [$drawer->getPosition()]
         );
 
         return $this->redirectToRoute('app_cabinet_show', [

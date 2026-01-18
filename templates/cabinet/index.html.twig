@@ -12,6 +12,7 @@
                 <th>Name</th>
                 <th>IpAddress</th>
                 <th>DrawerCount</th>
+                <th>LEDCount</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ cabinet.name }}</td>
                 <td>{{ cabinet.ipAddress }}</td>
                 <td>{{ cabinet.drawerCount }}</td>
+                <td>{{ cabinet.lEDCount }}</td>
                 <td>
                     <a href="{{ path('app_cabinet_show', {'id': cabinet.id}) }}" class="btn btn-sm btn-primary">
                         Show
@@ -33,7 +35,12 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         {% endfor %}
         </tbody>

@@ -46,7 +46,7 @@ class WLEDClient
                 'bri' => 255,
                 'seg' => [
                     'start' => 0,
-                    'stop' => 10,
+                    'stop' => 70,
                 ]
             ]]
         );
@@ -115,7 +115,7 @@ class WLEDClient
     public function powerOnMultiLED(string $ip, array $ledIds): int
     {
         // Build a full frame of "off"
-        $pixels = array_fill(0, 10, [0, 0, 0]);
+        $pixels = array_fill(0, 70, [0, 0, 0]);
 
         // Turn on just one LED (red here)
         foreach ($ledIds as $ledId)
@@ -140,7 +140,6 @@ class WLEDClient
         );
 
         return $response->getStatusCode();
-
     }
 
     private function buildUrl(string $ip, string $endpoint): string

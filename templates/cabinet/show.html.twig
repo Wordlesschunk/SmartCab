@@ -23,8 +23,57 @@
                 <th>DrawerCount</th>
                 <td>{{ cabinet.drawerCount }}</td>
             </tr>
+            <tr>
+                <th>LEDCount</th>
+                <td>{{ cabinet.lEDCount }}</td>
+            </tr>
         </tbody>
     </table>
+
+    <h1>Drawers Mappings</h1>
+    <hr>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Drawer</th>
+            <th>Label</th>
+            <th>Position</th>
+            <th>Preferred Position</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for drawer in cabinet.drawers %}
+        <tr>
+            <td>{{ drawer.id }}</td>
+            <td>{{ drawer.label }}</td>
+            <td>{{ drawer.position }}</td>
+            <td>
+                <twig:InlineEditDrawerLEDPosition :drawer="drawer"/>
+            </td>
+            <td>
+                <a href="{{ path('drawer_power_on', { 'id': drawer.id }) }}" class="btn btn-sm btn-info">
+                    Test
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <h3>Power Settings (DEBUG)</h3>
+        <a href="{{ path('cab_on', { 'id': cabinet.id }) }}" class="btn btn-sm btn-info">
+            Power On
+        </a>
+        <a href="{{ path('cab_off', { 'id': cabinet.id }) }}" class="btn btn-sm btn-info">
+            Power Off
+        </a>
+        <a href="{{ path('cab_on_single', { 'id': cabinet.id }) }}" class="btn btn-sm btn-info">
+            Power On Single
+        </a>
+    </div>
 
     <a href="{{ path('app_cabinet_index') }}">back to list</a>
 

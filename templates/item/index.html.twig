@@ -81,13 +81,15 @@
                     </div>
                 </td>
 
+{#                {{ dump(item.drawer) }}#}
+
                 <td>
                     <twig:InlineEditItemDrawer :item="item"/>
                 </td>
 
                 <td class="actions-btns">
                     <div class="d-flex gap-2">
-                        <a href="" class="btn btn-sm btn-info">
+                        <a href="{{ path('locate_item', { 'id': item.id }) }}" class="btn btn-sm btn-info">
                             FIND
                         </a>
 

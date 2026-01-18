@@ -23,10 +23,6 @@ class CabinetType extends AbstractType
             ->add('drawerCount', IntegerType::class, [
                 'attr' => ['class' => 'form-select'],
             ])
-            ->add('lEDCount', IntegerType::class, [
-                'label' => 'LED Count',
-                'attr' => ['class' => 'form-select'],
-            ])
         ;
     }
 

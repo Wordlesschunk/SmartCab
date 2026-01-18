@@ -33,9 +33,6 @@ class Cabinet
     #[ORM\OneToMany(targetEntity: Drawer::class, mappedBy: 'cabinet', orphanRemoval: true)]
     private Collection $drawers;
 
-    #[ORM\Column]
-    private int $LEDCount;
-
     public function __construct()
     {
         $this->drawers = new ArrayCollection();
@@ -108,18 +105,6 @@ class Cabinet
                 $drawer->setCabinet(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getLEDCount(): int
-    {
-        return $this->LEDCount;
-    }
-
-    public function setLEDCount(int $LEDCount): static
-    {
-        $this->LEDCount = $LEDCount;
 
         return $this;
     }

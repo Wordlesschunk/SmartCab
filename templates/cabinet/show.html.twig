@@ -23,20 +23,15 @@
                 <th>DrawerCount</th>
                 <td>{{ cabinet.drawerCount }}</td>
             </tr>
-            <tr>
-                <th>LEDCount</th>
-                <td>{{ cabinet.lEDCount }}</td>
-            </tr>
         </tbody>
     </table>
 
-    <h1>Drawers Mappings</h1>
+    <h4>Drawer Light Mappings</h4>
     <hr>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Drawer</th>
             <th>Label</th>
             <th>Position</th>
             <th>Action</th>
@@ -45,7 +40,6 @@
         <tbody>
         {% for drawer in cabinet.drawers %}
         <tr>
-            <td>{{ drawer.id }}</td>
             <td>{{ drawer.label }}</td>
             <td><twig:InlineEditDrawerPosition :drawer="drawer"/></td>
             <td>

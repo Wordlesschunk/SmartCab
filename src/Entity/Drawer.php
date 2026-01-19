@@ -27,6 +27,7 @@ class Drawer
 
     #[ORM\Column]
     private int $position;
+    //todo this can be renamed to ledPosition
 
     /**
      * @var Collection<int, Item>

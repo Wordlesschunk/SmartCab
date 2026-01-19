@@ -27,6 +27,12 @@ class Cabinet
     #[ORM\Column]
     private int $drawerCount;
 
+    #[ORM\Column]
+    private int $rowCount;
+
+    #[ORM\Column]
+    private int $columnCount;
+
     /**
      * @var Collection<int, Drawer>
      */
@@ -107,5 +113,25 @@ class Cabinet
         }
 
         return $this;
+    }
+
+    public function getColumnCount(): int
+    {
+        return $this->columnCount;
+    }
+
+    public function setColumnCount(int $columnCount): void
+    {
+        $this->columnCount = $columnCount;
+    }
+
+    public function getRowCount(): int
+    {
+        return $this->rowCount;
+    }
+
+    public function setRowCount(int $rowCount): void
+    {
+        $this->rowCount = $rowCount;
     }
 }

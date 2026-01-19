@@ -29,20 +29,36 @@ final class CabinetController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $cabinet = new Cabinet();
+        $cabinet->setColumnCount(4);
+        $cabinet->setRowCount(5);
         $form = $this->createForm(CabinetType::class, $cabinet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            for ($i = 0; $i < $cabinet->getDrawerCount(); $i++) {
-                $drawer = Drawer::create(
-                    $cabinet,
-                    'Drawer '.$i,
-                    $i
-                );
+            $rows = 10;
+            $columns = 5;
 
-                $entityManager->persist($drawer);
-                $cabinet->addDrawer($drawer);
+            $position = 0;
+
+            for ($row = 0; $row < $rows; $row++) {
+
+                // Convert 0 → A, 1 → B, etc.
+                $rowLetter = chr(ord('A') + $row);
+
+                for ($col = 1; $col <= $columns; $col++) {
+
+                    $drawer = Drawer::create(
+                        $cabinet,
+                        $rowLetter . $col,   // e.g. A1
+                        $position            // optional ordering index
+                    );
+
+                    $cabinet->addDrawer($drawer);
+                    $entityManager->persist($drawer);
+
+                    $position++;
+                }
             }
 
             $entityManager->persist($cabinet);
